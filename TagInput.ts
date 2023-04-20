@@ -5,8 +5,8 @@ export interface TagInputMethods {
 }
 
 export interface TagInputOptions {
-    input: HTMLInputElement;
-    tagContainer: HTMLDivElement | HTMLSpanElement;
+    input: JQuery | HTMLInputElement;
+    tagContainer: JQuery | HTMLDivElement | HTMLSpanElement;
     setKeyUp: boolean;
     forceSelection: boolean;
     tagClass: string | string[];
@@ -33,15 +33,19 @@ function TagInput(options: TagInputOptions): TagInputMethods {
     let suggestionContainer: any;
     let debounceTimer: any;
     
-    let input: HTMLInputElement = options.input;
-    let tagContainer: HTMLDivElement | HTMLSpanElement = options.tagContainer;
+    let input: HTMLInputElement;
+    let tagContainer: HTMLDivElement | HTMLSpanElement;
 
-    if (input instanceof jQuery) {
-        input = input[0];
+    if (options.input instanceof jQuery) {
+        input = options.input[0];
+    } else {
+        input = <HTMLInputElement>options.input
     }
 
-    if (tagContainer instanceof jQuery) {
-        tagContainer = tagContainer[0];
+    if (options.tagContainer instanceof jQuery) {
+        tagContainer = options.tagContainer[0];
+    } else {
+        tagContainer = <HTMLDivElement | HTMLSpanElement>options.tagContainer;
     }
 
     if (!input) {
