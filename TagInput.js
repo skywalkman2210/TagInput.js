@@ -1,4 +1,4 @@
-// Define JQuery Extension, always passing element as target.
+// Define JQuery Extension, always passing element as input.
 if (typeof jQuery == 'function') {
     $.fn.extend({
         TagInput: function (options) {
